@@ -1,3 +1,15 @@
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+
+
+  <link href="assets/css/demo.css" rel="stylesheet" />
+  <link href="assets/css/fresh-bootstrap-table.css" rel="stylesheet" />
+
+
+
 <p style="color: green"><%= notice %></p>
 
 <div class="container">
@@ -5,6 +17,7 @@
 
   <%= link_to "New client", new_client_path %>
 
+<!--
   <div id="clients">
     <table class="table table-bordered">
       <thead>
@@ -25,41 +38,34 @@
   </div>
 </div>
 <hr>
+-->
+
+<% content_for :head do %>
+  <link rel="stylesheet" href="demo.css">
+<% end %>
+
+<!-- Resto de tu contenido HTML.erb -->
+
+
+
 
 <div class="wrapper">
-
-
-
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="description">
-          <h2>Fresh Bootstrap Table</h2>
-        </div>
-
+      <div class="col-md-10 ">
         <div class="fresh-table ">
-
-
-
           <table id="fresh-table" class="table">
             <thead>
               <th data-field="id">ID</th>
               <th data-field="name" data-sortable="true">Name</th>
               <th data-field="salary" data-sortable="true">Age</th>
               <th data-field="country" data-sortable="true">Movie</th>
-
               <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Dakota Rice</td>
-                <td>$36,738</td>
-                <td>Niger</td>
-
-                <td></td>
-              </tr>
-
+        <% @clients.each do |client| %>
+          <%= render client %>
+        <% end %>
             </tbody>
           </table>
         </div>
@@ -67,13 +73,10 @@
     </div>
   </div>
 </div>
-
-
 </body>
   <script type="text/javascript">
     var $table = $('#fresh-table')
     var $alertBtn = $('#alertBtn')
-
     window.operateEvents = {
       'click .like': function (e, value, row, index) {
         alert('You click like icon, row: ' + JSON.stringify(row))

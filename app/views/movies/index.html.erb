@@ -1,13 +1,45 @@
 <p style="color: green"><%= notice %></p>
 
-<div class="container">
-  <h1>Movies</h1>
-  <%= link_to "New movie", new_movie_path %>
-  <div id="movies">
-    <div class="row">
-      <% @movies.each do |movie| %>
-        <%= render movie %>
-      <% end %>
+        <!-- main-area -->
+        <main>
+
+            <!-- banner-area-end -->
+            <!-- top-rated-movie -->
+            <section class="top-rated-movie tr-movie-bg">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="section-title text-center mb-50">
+                                <span class="sub-title">ONLINE STREAMING</span>
+                                <h2 class="title">Top Rated Movies</h2>
+                            </div>
+                        </div>
+                    </div>
+<div class="row tr-movie-active">
+  <% @movies.each do |movie| %>
+    <% random_id = rand(1..100) %>
+    <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
+      <div class="movie-item mb-60">
+        <div class="movie-poster">
+          <%= link_to movie_path(movie) do %>
+
+            <%= image_tag "https://picsum.photos/id/#{random_id}/200/300", alt: '' %>
+          <% end %>
+        </div>
+        <div class="movie-content">
+          <div class="top">
+            <h5 class="title"><a href="<%= movie_path(movie) %>"><%= movie.name %></a></h5>
+          </div>
+
+        </div>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
+               </div>
+            </section>
+            <!-- top-rated-movie-end -->
+
+    </body>
+</html>
+
