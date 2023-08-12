@@ -1,0 +1,190 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container">
+  <h1>Clients</h1>
+
+  <%= link_to "New client", new_client_path %>
+
+  <div id="clients">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Movie</th>
+          <th scope="col" colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @clients.each do |client| %>
+          <%= render client %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr>
+
+<div class="wrapper">
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="description">
+          <h2>Fresh Bootstrap Table</h2>
+        </div>
+
+        <div class="fresh-table ">
+
+
+
+          <table id="fresh-table" class="table">
+            <thead>
+              <th data-field="id">ID</th>
+              <th data-field="name" data-sortable="true">Name</th>
+              <th data-field="salary" data-sortable="true">Age</th>
+              <th data-field="country" data-sortable="true">Movie</th>
+
+              <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Dakota Rice</td>
+                <td>$36,738</td>
+                <td>Niger</td>
+
+                <td></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+  <script type="text/javascript">
+    var $table = $('#fresh-table')
+    var $alertBtn = $('#alertBtn')
+
+    window.operateEvents = {
+      'click .like': function (e, value, row, index) {
+        alert('You click like icon, row: ' + JSON.stringify(row))
+        console.log(value, row, index)
+      },
+      'click .edit': function (e, value, row, index) {
+        alert('You click edit icon, row: ' + JSON.stringify(row))
+        console.log(value, row, index)
+      },
+      'click .remove': function (e, value, row, index) {
+        $table.bootstrapTable('remove', {
+          field: 'id',
+          values: [row.id]
+        })
+      }
+    }
+    // Actions Icons
+    function operateFormatter(value, row, index) {
+      return [
+        '<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)" title="Like">',
+          '<i class="fa fa-eye"></i>',
+        '</a>',
+        '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)" title="Edit">',
+          '<i class="fa fa-edit"></i>',
+        '</a>',
+        '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)" title="Remove">',
+          '<i class="fa fa-ban"></i>',
+        '</a>'
+      ].join('')
+    }
+
+    $(function () {
+      $table.bootstrapTable({
+        classes: 'table table-hover table-striped',
+        toolbar: '.toolbar',
+
+        search: true,
+        showRefresh: true,
+        showToggle: true,
+        showColumns: true,
+        pagination: true,
+        striped: true,
+        sortable: true,
+        pageSize: 8,
+        pageList: [8, 10, 25, 50, 100],
+
+        formatShowingRows: function (pageFrom, pageTo, totalRows) {
+          return ''
+        },
+        formatRecordsPerPage: function (pageNumber) {
+          return pageNumber + ' rows visible'
+        }
+      })
+
+      $alertBtn.click(function () {
+        alert('You pressed on Alert')
+      })
+    })
+
+    $('#sharrreTitle').sharrre({
+      share: {
+        twitter: true,
+        facebook: true
+      },
+      template: '',
+      enableHover: false,
+      enableTracking: true,
+      render: function (api, options) {
+        $("#sharrreTitle").html('Thank you for ' + options.total + ' shares!')
+      },
+      enableTracking: true,
+      url: location.href
+    })
+
+    $('#twitter').sharrre({
+      share: {
+        twitter: true
+      },
+      enableHover: false,
+      enableTracking: true,
+      buttons: { twitter: {via: 'CreativeTim'}},
+      click: function (api, options) {
+        api.simulateClick()
+        api.openPopup('twitter')
+      },
+      template: '<i class="fa fa-twitter"></i> {total}',
+      url: location.href
+    })
+
+    $('#facebook').sharrre({
+      share: {
+        facebook: true
+      },
+      enableHover: false,
+      enableTracking: true,
+      click: function (api, options) {
+        api.simulateClick()
+        api.openPopup('facebook')
+      },
+      template: '<i class="fa fa-facebook-square"></i> {total}',
+      url: location.href
+    })
+  </script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga')
+
+    ga('create', 'UA-46172202-1', 'auto')
+    ga('send', 'pageview')
+
+  </script>
